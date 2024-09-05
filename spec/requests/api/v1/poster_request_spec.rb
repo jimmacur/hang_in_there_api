@@ -36,8 +36,7 @@ RSpec.describe "Posters" do
       expect(attributes[:year]).to be_an(Integer)
 
       expect(attributes).to have_key(:vintage)
-
-      # expect(attributes[:vintage]).to be_in([true, false])
+      expect(attributes[:vintage]).to be_in([true, false])
 
       expect(attributes).to have_key(:img_url)
       expect(attributes[:img_url]).to be_a(String)
@@ -75,8 +74,7 @@ RSpec.describe "Posters" do
       expect(attributes[:year]).to be_an(Integer)
 
       expect(attributes).to have_key(:vintage)
-
-      # expect(attributes[:vintage]).to be_in([true, false])
+      expect(attributes[:vintage]).to be_in([true, false])
 
       expect(attributes).to have_key(:img_url)
       expect(attributes[:img_url]).to be_a(String)

@@ -18,9 +18,10 @@ class Api::V1::PostersController < ApplicationController
     render json: PosterSerializer.new(poster)
   end
 
-  # def update
-  #   render json: Task.update(params[:id], task_params)
-  # end
+  def update
+    poster = Poster.update(params[:id], poster_params)
+    render json: PosterSerializer.new(poster)
+  end
 
   # def destroy
   #   render json: Task.delete(params[:id])

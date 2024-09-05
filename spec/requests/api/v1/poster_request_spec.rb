@@ -18,7 +18,7 @@ RSpec.describe "Posters" do
     posters[:data].each do |poster|
 
       expect(poster).to have_key(:id)
-      expect(poster[:id]).to be_an(Integer)
+      expect((poster[:id]).to_i).to be_an(Integer)
 
       expect(poster).to have_key(:attributes)
       attributes = poster[:attributes]
@@ -56,7 +56,7 @@ RSpec.describe "Posters" do
       poster = poster_response[:data]
 
       expect(poster).to have_key(:id)
-      expect(poster[:id]).to be_an(Integer)
+      expect((poster[:id]).to_i).to be_an(Integer)
 
       expect(poster).to have_key(:attributes)
       attributes = poster[:attributes]
@@ -78,6 +78,30 @@ RSpec.describe "Posters" do
 
       expect(attributes).to have_key(:img_url)
       expect(attributes[:img_url]).to be_a(String)
+  end
 
+  it 'can create a new poster' do
+    poster_params = {
+      name: "REGRET", 
+      description: "Hard work rarely pays off.", 
+      price: 89.0, 
+      year: 2018, 
+      vintage: true, 
+      img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d"
+    }
+
+    headers = { "CONTENT_TYPE" => "application/json" }
+    # We include this header to make sure that these params are passed as JSON rather than as plain text
+
+    post "/api/v1/posters", headers: headers, params: JSON.generate(poster: poster_params)
+    created_poster = Poster.last
+
+    expect(response).to be_successful
+    expect(created_poster.name).to eq(poster_params[:name])
+    expect(created_poster.description).to eq(poster_params[:description])
+    expect(created_poster.price).to eq(poster_params[:price])
+    expect(created_poster.year).to eq(poster_params[:year])
+    expect(created_poster.vintage).to eq(poster_params[:vintage])
+    expect(created_poster.img_url).to eq(poster_params[:img_url])
   end
 end

@@ -8,12 +8,14 @@ class Api::V1::PostersController < ApplicationController
 
   def show
     poster = Poster.find(params[:id])
-    render json: PosterSerializer.new(poster)
+    options = {}
+    options[:meta] = {count: 1}
+    render json: PosterSerializer.new(poster, options)
   end
 
-  # def create
-  #   render json: Task.create(task_params)
-  # end
+  def create
+    render json: Poster.create(poster_params)
+  end
 
   # def update
   #   render json: Task.update(params[:id], task_params)
@@ -23,9 +25,9 @@ class Api::V1::PostersController < ApplicationController
   #   render json: Task.delete(params[:id])
   # end
 
-  # private
+  private
 
-  # def task_params
-  #   params.require(:task).permit(:title, :description)
-  # end
+  def poster_params
+    params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
+  end
 end

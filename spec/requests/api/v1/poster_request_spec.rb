@@ -122,5 +122,17 @@ RSpec.describe "Posters" do
     expect(poster.name).to eq("REGRats")
   end
 
+  it "can destroy a poster" do
+    poster = Poster.create(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+
+    expect(Poster.count).to eq(1)
+
+    delete "/api/v1/posters/#{poster.id}"
+
+    expect(response).to be_successful
+    expect(Poster.count).to eq(0)
+    expect{ Poster.find(poster.id) }.to raise_error(ActiveRecord::RecordNotFound)
+  end
+
 
 end

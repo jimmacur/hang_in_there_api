@@ -104,4 +104,23 @@ RSpec.describe "Posters" do
     expect(created_poster.vintage).to eq(poster_params[:vintage])
     expect(created_poster.img_url).to eq(poster_params[:img_url])
   end
+
+  it "can update an existing poster" do
+    id = Poster.create(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d").id
+    
+    previous_name = Poster.last.name
+    poster_params = { name: "REGRats" }
+    headers = {"CONTENT_TYPE" => "application/json"}
+    # We include this header to make sure that these params are passed as JSON rather than as plain text
+
+    patch "/api/v1/posters/#{id}", headers: headers, params: JSON.generate({poster: poster_params})
+    poster = Poster.find_by(id: id)
+
+    expect(response).to be_successful
+    
+    expect(poster.name).to_not eq(previous_name)
+    expect(poster.name).to eq("REGRats")
+  end
+
+
 end

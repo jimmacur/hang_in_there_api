@@ -23,9 +23,9 @@ class Api::V1::PostersController < ApplicationController
     render json: PosterSerializer.new(poster)
   end
 
-  # def destroy
-  #   render json: Task.delete(params[:id])
-  # end
+  def destroy
+    render json: Poster.delete(params[:id])
+  end
 
   private
 

@@ -5,8 +5,7 @@ class CreatePosters < ActiveRecord::Migration[7.1]
       t.string :description
       t.float :price
       t.integer :year
-      t.string :vintage
-      t.string :boolean
+      t.boolean :vintage
       t.string :img_url
 
       t.timestamps

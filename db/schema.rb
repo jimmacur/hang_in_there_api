@@ -19,8 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_020401) do
     t.string "description"
     t.float "price"
     t.integer "year"
-    t.string "vintage"
-    t.string "boolean"
+    t.boolean "vintage"
     t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

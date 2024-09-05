@@ -43,4 +43,43 @@ RSpec.describe "Posters" do
       expect(attributes[:img_url]).to be_a(String)
     end
   end
+
+  it "sends data for one poster" do
+    poster_1 = Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+
+    get "/api/v1/posters/#{poster_1.id}"
+
+    expect(response).to be_successful
+
+    poster_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(poster_response).to have_key(:data)
+      poster = poster_response[:data]
+
+      expect(poster).to have_key(:id)
+      expect(poster[:id]).to be_an(Integer)
+
+      expect(poster).to have_key(:attributes)
+      attributes = poster[:attributes]
+
+      expect(attributes).to have_key(:name)
+      expect(attributes[:name]).to be_a(String)
+
+      expect(attributes).to have_key(:description)
+      expect(attributes[:description]).to be_a(String)
+
+      expect(attributes).to have_key(:price)
+      expect(attributes[:price]).to be_a(Float)
+
+      expect(attributes).to have_key(:year)
+      expect(attributes[:year]).to be_an(Integer)
+
+      expect(attributes).to have_key(:vintage)
+
+      # expect(attributes[:vintage]).to be_in([true, false])
+
+      expect(attributes).to have_key(:img_url)
+      expect(attributes[:img_url]).to be_a(String)
+
+  end
 end

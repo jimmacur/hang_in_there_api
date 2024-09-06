@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'simplecov'
+SimpleCov.start 'rails'
 
 RSpec.describe "Posters" do
   it "sends a list of posters" do
@@ -12,7 +14,7 @@ RSpec.describe "Posters" do
 
     expect(response).to be_successful
 
-    posters = JSON.parse(response.body, symbolize_names: true)
+    posters = JSON.parse(response.body, symbolize_names: true)#[:data]
     expect(posters[:data].count).to eq(3)
 
     posters[:data].each do |poster|
@@ -109,7 +111,11 @@ RSpec.describe "Posters" do
     id = Poster.create(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d").id
     
     previous_name = Poster.last.name
-    poster_params = { name: "REGRats" }
+    previous_price = Poster.last.price
+
+    poster_params = { name: "REGRats", price: 75.5 }
+    
+
     headers = {"CONTENT_TYPE" => "application/json"}
     # We include this header to make sure that these params are passed as JSON rather than as plain text
 
@@ -120,6 +126,9 @@ RSpec.describe "Posters" do
     
     expect(poster.name).to_not eq(previous_name)
     expect(poster.name).to eq("REGRats")
+    expect(poster.price).to_not eq(previous_price)
+    expect(poster.price).to eq(75.5)
+
   end
 
   it "can destroy a poster" do

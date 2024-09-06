@@ -1,36 +1,38 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/models/poster.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/models/poster.rb": {
         "lines": [
           1,
           null,
           null
         ]
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/models/application_record.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/controllers/api/v1/posters_controller.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/controllers/api/v1/posters_controller.rb": {
         "lines": [
           1,
           1,
-          4,
           null,
+          7,
+          1,
+          6,
+          2,
           4,
           1,
-          null,
           3,
+          1,
           null,
-          4,
+          2,
           null,
           null,
-          null,
-          4,
+          7,
           null,
           null,
           null,
@@ -61,14 +63,14 @@
           null
         ]
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/controllers/application_controller.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
           null
         ]
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/serializers/poster_serializer.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/serializers/poster_serializer.rb": {
         "lines": [
           1,
           1,
@@ -76,7 +78,7 @@
           null
         ]
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/channels/application_cable/channel.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
           0,
@@ -86,7 +88,7 @@
         "branches": {
         }
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/channels/application_cable/connection.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
           0,
@@ -96,7 +98,7 @@
         "branches": {
         }
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/jobs/application_job.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -109,7 +111,7 @@
         "branches": {
         }
       },
-      "/Users/shawnthompson/turing_work/2mod/hang_in_there_api/app/mailers/application_mailer.rb": {
+      "/Users/jamesmacur/turing_work/2mod/hang_in_there_api/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -120,6 +122,6 @@
         }
       }
     },
-    "timestamp": 1725586465
+    "timestamp": 1725651575
   }
 }

@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'simplecov'
-SimpleCov.start 'rails'
 
 RSpec.describe "Posters" do
   it "sends a list of posters" do

@@ -91,7 +91,6 @@ RSpec.describe "Posters" do
     }
 
     headers = { "CONTENT_TYPE" => "application/json" }
-    # We include this header to make sure that these params are passed as JSON rather than as plain text
 
     post "/api/v1/posters", headers: headers, params: JSON.generate(poster: poster_params)
     created_poster = Poster.last
@@ -190,4 +189,20 @@ RSpec.describe "Posters" do
     expect(posters[:data].last[:attributes][:name]).to eq("REGRET")
   end
 
+  it "sends a filter list by name selection" do
+    Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "MEDIOCRITY", description: "Dreams are just that—dreams.", price: 127.00, year: 2021, vintage: false, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  
+    expect(Poster.count).to eq(3)  
+
+    get "/api/v1/posters?name=re"
+
+    expect(response).to be_successful
+
+    posters = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(posters[:data].first[:attributes][:name]).to eq("FAILURE")
+  end
+  
 end

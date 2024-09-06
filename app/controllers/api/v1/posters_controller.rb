@@ -1,16 +1,18 @@
 class Api::V1::PostersController < ApplicationController
   def index
-    sort_order = ''
+  
+    if params[:name].present?
+      posters = Poster.where("name ILIKE ?", "%#{params[:name]}%").order("name ASC")
+    elsif params[:sort].present?
+      posters = Poster.order(created_at: params[:sort])
+    # elsif params[:max_price]
 
-    if params[:sort] == 'asc'
-      sort_order = 'ASC'
+    # elsif params[:min_price]
+
     else
-      sort_order = 'DESC'
+      posters = Poster.order(created_at: "ASC")
     end
-    posters = Poster.order(created_at: sort_order)
-    # posters = Poster.all
-    
-    
+
     render json: PosterSerializer.new(posters, meta: {count: posters.count})
 
   end

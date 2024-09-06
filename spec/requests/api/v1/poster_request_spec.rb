@@ -12,7 +12,7 @@ RSpec.describe "Posters" do
 
     expect(response).to be_successful
 
-    posters = JSON.parse(response.body, symbolize_names: true)#[:data]
+    posters = JSON.parse(response.body, symbolize_names: true)
     expect(posters[:data].count).to eq(3)
 
     posters[:data].each do |poster|
@@ -90,7 +90,7 @@ RSpec.describe "Posters" do
       img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d"
     }
 
-    headers = { "CONTENT_TYPE" => "application/json" }
+    headers = {"CONTENT_TYPE" => "application/json"}
 
     post "/api/v1/posters", headers: headers, params: JSON.generate(poster: poster_params)
     created_poster = Poster.last
@@ -110,11 +110,9 @@ RSpec.describe "Posters" do
     previous_name = Poster.last.name
     previous_price = Poster.last.price
 
-    poster_params = { name: "REGRats", price: 75.5 }
+    poster_params = {name: "REGRats", price: 75.5}
     
-
     headers = {"CONTENT_TYPE" => "application/json"}
-    # We include this header to make sure that these params are passed as JSON rather than as plain text
 
     patch "/api/v1/posters/#{id}", headers: headers, params: JSON.generate({poster: poster_params})
     poster = Poster.find_by(id: id)
@@ -136,7 +134,7 @@ RSpec.describe "Posters" do
 
     expect(response).to be_successful
     expect(Poster.count).to eq(0)
-    expect{ Poster.find(poster.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    expect{Poster.find(poster.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
   it "sends returning count of posters" do
@@ -238,5 +236,4 @@ RSpec.describe "Posters" do
     expect(posters[:data].first[:attributes][:price]).to eq(127.0)
     expect(posters[:data].last[:attributes][:price]).to eq(127.0)
   end
-
 end

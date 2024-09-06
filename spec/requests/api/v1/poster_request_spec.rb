@@ -5,9 +5,7 @@ SimpleCov.start 'rails'
 RSpec.describe "Posters" do
   it "sends a list of posters" do
     Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
-
     Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
-
     Poster.create!(name: "MEDIOCRITY", description: "Dreams are just that—dreams.", price: 127.00, year: 2021, vintage: false, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
 
     get "/api/v1/posters"
@@ -20,7 +18,7 @@ RSpec.describe "Posters" do
     posters[:data].each do |poster|
 
       expect(poster).to have_key(:id)
-      expect((poster[:id]).to_i).to be_an(Integer)
+      expect((poster[:id])).to be_an(String)
 
       expect(poster).to have_key(:attributes)
       attributes = poster[:attributes]
@@ -58,7 +56,7 @@ RSpec.describe "Posters" do
       poster = poster_response[:data]
 
       expect(poster).to have_key(:id)
-      expect((poster[:id]).to_i).to be_an(Integer)
+      expect((poster[:id])).to be_an(String)
 
       expect(poster).to have_key(:attributes)
       attributes = poster[:attributes]
@@ -128,7 +126,6 @@ RSpec.describe "Posters" do
     expect(poster.name).to eq("REGRats")
     expect(poster.price).to_not eq(previous_price)
     expect(poster.price).to eq(75.5)
-
   end
 
   it "can destroy a poster" do
@@ -143,5 +140,54 @@ RSpec.describe "Posters" do
     expect{ Poster.find(poster.id) }.to raise_error(ActiveRecord::RecordNotFound)
   end
 
+  it "sends returning count of posters" do
+    Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "MEDIOCRITY", description: "Dreams are just that—dreams.", price: 127.00, year: 2021, vintage: false, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  
+    expect(Poster.count).to eq(3)  
+
+    get "/api/v1/posters"
+
+    expect(response).to be_successful
+    
+    posters = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(posters[:meta][:count]).to eq(3)
+  end
+
+  it "sends an ascending list of posters" do
+    Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "MEDIOCRITY", description: "Dreams are just that—dreams.", price: 127.00, year: 2021, vintage: false, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  
+    expect(Poster.count).to eq(3)  
+
+    get "/api/v1/posters?sort=asc"
+
+    expect(response).to be_successful
+    
+    posters = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(posters[:data].first[:attributes][:name]).to eq("REGRET")
+    expect(posters[:data].last[:attributes][:name]).to eq("MEDIOCRITY")
+  end
+
+  it "sends a descending list of posters" do
+    Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "MEDIOCRITY", description: "Dreams are just that—dreams.", price: 127.00, year: 2021, vintage: false, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  
+    expect(Poster.count).to eq(3)  
+
+    get "/api/v1/posters?sort=desc"
+
+    expect(response).to be_successful
+
+    posters = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(posters[:data].first[:attributes][:name]).to eq("MEDIOCRITY")
+    expect(posters[:data].last[:attributes][:name]).to eq("REGRET")
+  end
 
 end

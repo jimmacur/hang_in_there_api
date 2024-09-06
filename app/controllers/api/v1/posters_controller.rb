@@ -7,8 +7,8 @@ class Api::V1::PostersController < ApplicationController
       posters = Poster.order(created_at: params[:sort])
     elsif params[:max_price].present?
       posters = Poster.where("price < ?", params[:max_price])
-    # elsif params[:min_price]
-
+    elsif params[:min_price]
+      posters = Poster.where("price > ?", params[:min_price])
     else
       posters = Poster.order(created_at: "ASC")
     end

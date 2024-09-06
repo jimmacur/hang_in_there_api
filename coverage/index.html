@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-09-06T13:11:33-06:00">2024-09-06T13:11:33-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-09-06T13:36:53-06:00">2024-09-06T13:36:53-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  67.44%
+  68.89%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
-       <span class="yellow">
-         1.0
+       <span class="green">
+         1.11
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>43</b> relevant lines,
-    <span class="green"><b>29</b> lines covered</span> and
+    <b>45</b> relevant lines,
+    <span class="green"><b>31</b> lines covered</span> and
     <span class="red"><b>14</b> lines missed. </span>
     (<span class="red">
-  67.44%
+  68.89%
 </span>
 )
   </div>
@@ -96,10 +96,10 @@
             <td class="strong t-file__name"><a href="#e0b81243142426a0a82dc15f34b6c7fc972988a8" class="src_link" title="app/controllers/api/v1/posters_controller.rb">app/controllers/api/v1/posters_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">44</td>
-            <td class="cell--number">22</td>
-            <td class="cell--number">22</td>
+            <td class="cell--number">24</td>
+            <td class="cell--number">24</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.64</td>
+            <td class="cell--number">1.79</td>
             
           </tr>
         
@@ -188,7 +188,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.61
+         1.76
        </span>
     </span> hits/line
     )
@@ -201,8 +201,8 @@
   </div>
 
   <div class="t-line-summary">
-    <b>23</b> relevant lines,
-    <span class="green"><b>23</b> lines covered</span> and
+    <b>25</b> relevant lines,
+    <span class="green"><b>25</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed. </span>
     (<span class="green">
   100.0%
@@ -232,10 +232,10 @@
             <td class="strong t-file__name"><a href="#e0b81243142426a0a82dc15f34b6c7fc972988a8" class="src_link" title="app/controllers/api/v1/posters_controller.rb">app/controllers/api/v1/posters_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">44</td>
-            <td class="cell--number">22</td>
-            <td class="cell--number">22</td>
+            <td class="cell--number">24</td>
+            <td class="cell--number">24</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.64</td>
+            <td class="cell--number">1.79</td>
             
           </tr>
         
@@ -913,8 +913,8 @@
     
 
     <div class="t-line-summary">
-      <b>22</b> relevant lines.
-      <span class="green"><b>22</b> lines covered</span> and
+      <b>24</b> relevant lines.
+      <span class="green"><b>24</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -959,8 +959,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="4">
-            <span class="hits">5</span>
+          <li class="covered" data-hits="6" data-linenumber="4">
+            <span class="hits">6</span>
             
 
             
@@ -981,8 +981,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="6">
-            <span class="hits">4</span>
+          <li class="covered" data-hits="5" data-linenumber="6">
+            <span class="hits">5</span>
             
 
             
@@ -1003,24 +1003,24 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="8">
-            
-            
-
+          <li class="covered" data-hits="3" data-linenumber="8">
+            <span class="hits">3</span>
             
 
-            <code class="ruby">    # elsif params[:max_price]</code>
+            
+
+            <code class="ruby">    elsif params[:max_price].present?</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">      posters = Poster.where(&quot;price &lt; ?&quot;, params[:max_price])</code>
           </li>
         </div>
       
@@ -1091,8 +1091,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="16">
-            <span class="hits">5</span>
+          <li class="covered" data-hits="6" data-linenumber="16">
+            <span class="hits">6</span>
             
 
             

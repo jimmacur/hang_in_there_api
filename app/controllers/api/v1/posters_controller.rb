@@ -5,8 +5,8 @@ class Api::V1::PostersController < ApplicationController
       posters = Poster.where("name ILIKE ?", "%#{params[:name]}%").order("name ASC")
     elsif params[:sort].present?
       posters = Poster.order(created_at: params[:sort])
-    # elsif params[:max_price]
-
+    elsif params[:max_price].present?
+      posters = Poster.where("price < ?", params[:max_price])
     # elsif params[:min_price]
 
     else

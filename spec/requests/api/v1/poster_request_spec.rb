@@ -140,6 +140,22 @@ RSpec.describe "Posters" do
     expect{ Poster.find(poster.id) }.to raise_error(ActiveRecord::RecordNotFound)
   end
 
+  it "sends returning count of posters" do
+    Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "MEDIOCRITY", description: "Dreams are just that—dreams.", price: 127.00, year: 2021, vintage: false, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  
+    expect(Poster.count).to eq(3)  
+
+    get "/api/v1/posters"
+
+    expect(response).to be_successful
+    
+    posters = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(posters[:meta][:count]).to eq(3)
+  end
+
   it "sends an ascending list of posters" do
     Poster.create!(name: "REGRET", description: "Hard work rarely pays off.", price: 89.0, year: 2018, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
     Poster.create!(name: "FAILURE", description: "Why bother trying? It's probably not worth it.", price: 68.00, year: 2019, vintage: true, img_url: "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")

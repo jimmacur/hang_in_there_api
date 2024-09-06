@@ -1,6 +1,5 @@
 class Api::V1::PostersController < ApplicationController
   def index
-  
     if params[:name].present?
       posters = Poster.where("name ILIKE ?", "%#{params[:name]}%").order("name ASC")
     elsif params[:sort].present?
@@ -14,7 +13,6 @@ class Api::V1::PostersController < ApplicationController
     end
 
     render json: PosterSerializer.new(posters, meta: {count: posters.count})
-
   end
 
   def show
